@@ -2938,9 +2938,8 @@ var minimap
 
 async function _workshop ({ workshop, theme = {}, whitelabel } = {}) {
   // var data = workshop ? require(workshop) : await fetch('/workshop.json')
-  var data = (typeof workshop === 'string') ?
-    await fetch(new URL(workshop || './workshop.json', location.href).href).then(response => response.json())
-    : workshop
+  var data = (typeof workshop === 'object') ? workshop
+    : await fetch(new URL(workshop || './workshop.json', location.href).href).then(response => response.json())
   var font_url = theme['--font']
   minimap = 'src/skilltree.png'
   var lessons = data.lessons
@@ -3424,6 +3423,7 @@ function styles (font_url, theme) {
     }
     .sandbox {
       overflow: hidden;
+      height: 100%;
     }
     .gitter {
       position: absolute;
@@ -3512,6 +3512,7 @@ var colors = {
   androidGreen: "#9BC53D"
 }
 module.exports = {
+  '--font': 'src/OverpassMono-Regular.ttf',
   menu_minHeight: '0px',
   menu_height: '5%',
   menu_border: '0',

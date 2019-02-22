@@ -12,6 +12,7 @@ var colors = {
   androidGreen: "#9BC53D"
 }
 module.exports = {
+  '--font': 'src/OverpassMono-Regular.ttf',
   menu_minHeight: '0px',
   menu_height: '5%',
   menu_border: '0',

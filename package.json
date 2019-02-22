@@ -1,7 +1,7 @@
 {
   "name": "play-workshop",
-  "version": "0.0.0",
-  "description": "module for making workshop app with a play theme",
+  "version": "0.1.0",
+  "description": "module for making play themed workshop apps",
   "main": "src/workshop.js",
   "scripts": {
     "start": "budo demo/demo.js:bundle.js --title $npm_package_name --force-default-index --ssl --live --open",

@@ -1,2 +1,2 @@
 # play-workshop
-module for making workshop app with a play theme
+module for making play themed workshop apps
