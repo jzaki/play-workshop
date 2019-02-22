@@ -1,4 +1,55 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+// USAGE
+const workshop = require('../') // no default theme initialised
+
+// var workshop1 = workshop.customize(workshop.defaults) // default theme initialised
+// console.log(workshop === workshop1) // true
+// /* or */ var workshop2 = workshop.customize({})
+// console.log(workshop1 === workshop2) // false
+// var el = workshop({}) // inits and uses default theme
+
+setTimeout(async () => {
+  // @TODO: every FIELD can be either an OBJECT or URL to a JSON
+  //        and it has DEFAULTS
+  const data = '/demo/workshop.json'
+  const opts = {
+    config: {
+      home_link: 'http://github.com/ethereum/play',
+      home_text: 'decentralized e-learning made by play.ethereum.org',
+      intro_prefix_text: 'Learn with Play',
+    },
+    theme: {
+      menu_backgroundColor: 'yellow',
+    },
+    css: { },
+  }
+  var app
+  app = await workshop(data, opts)
+
+  const el = await app.render()
+  document.body.appendChild(el)
+}, 0)
+
+var height = '100vh'
+// var height = 'auto'
+var st = document.createElement('style')
+st.innerHTML = `
+  html {
+    box-sizing: border-box;
+    display: table;
+    min-width: 100%;
+    margin: 0;
+  }
+  body {
+    box-sizing: border-box;
+    margin: 0;
+    display: flex;
+    flex-flow: column;
+    height: ${height};
+  }`
+document.head.appendChild(st)
+
+},{"../":37}],2:[function(require,module,exports){
 var trailingNewlineRegex = /\n[\s]+$/
 var leadingNewlineRegex = /^\n[\s]+/
 var trailingSpaceRegex = /[\s]+$/
@@ -131,7 +182,7 @@ module.exports = function appendChild (el, childs) {
   }
 }
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 var hyperx = require('hyperx')
 var appendChild = require('./appendChild')
 
@@ -232,7 +283,7 @@ module.exports = hyperx(belCreateElement, {comments: true})
 module.exports.default = module.exports
 module.exports.createElement = belCreateElement
 
-},{"./appendChild":1,"hyperx":27}],3:[function(require,module,exports){
+},{"./appendChild":2,"hyperx":29}],4:[function(require,module,exports){
 var document = require('global/document')
 var hyperx = require('hyperx')
 var onload = require('on-load')
@@ -387,7 +438,7 @@ module.exports = hyperx(belCreateElement, {comments: true})
 module.exports.default = module.exports
 module.exports.createElement = belCreateElement
 
-},{"global/document":24,"hyperx":27,"on-load":31}],4:[function(require,module,exports){
+},{"global/document":26,"hyperx":29,"on-load":33}],5:[function(require,module,exports){
 var bel = require('bel')
 var marked = require('marked')
 
@@ -415,7 +466,9 @@ function belmark (source = '', ...values) {
   return render(bel, values)
 }
 
-},{"bel":3,"marked":29}],5:[function(require,module,exports){
+},{"bel":4,"marked":31}],6:[function(require,module,exports){
+
+},{}],7:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -434,12 +487,12 @@ function csjsInserter() {
 module.exports = csjsInserter;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"csjs":10,"insert-css":28}],6:[function(require,module,exports){
+},{"csjs":12,"insert-css":30}],8:[function(require,module,exports){
 'use strict';
 
 module.exports = require('csjs/get-css');
 
-},{"csjs/get-css":9}],7:[function(require,module,exports){
+},{"csjs/get-css":11}],9:[function(require,module,exports){
 'use strict';
 
 var csjs = require('./csjs');
@@ -448,17 +501,17 @@ module.exports = csjs;
 module.exports.csjs = csjs;
 module.exports.getCss = require('./get-css');
 
-},{"./csjs":5,"./get-css":6}],8:[function(require,module,exports){
+},{"./csjs":7,"./get-css":8}],10:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/csjs');
 
-},{"./lib/csjs":14}],9:[function(require,module,exports){
+},{"./lib/csjs":16}],11:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/get-css');
 
-},{"./lib/get-css":18}],10:[function(require,module,exports){
+},{"./lib/get-css":20}],12:[function(require,module,exports){
 'use strict';
 
 var csjs = require('./csjs');
@@ -468,7 +521,7 @@ module.exports.csjs = csjs;
 module.exports.noScope = csjs({ noscope: true });
 module.exports.getCss = require('./get-css');
 
-},{"./csjs":8,"./get-css":9}],11:[function(require,module,exports){
+},{"./csjs":10,"./get-css":11}],13:[function(require,module,exports){
 'use strict';
 
 /**
@@ -490,7 +543,7 @@ module.exports = function encode(integer) {
   return str;
 };
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 var makeComposition = require('./composition').makeComposition;
@@ -534,7 +587,7 @@ function getClassChain(obj) {
   return acc;
 }
 
-},{"./composition":13}],13:[function(require,module,exports){
+},{"./composition":15}],15:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -614,7 +667,7 @@ function ignoreComposition(values) {
  */
 function Composition() {}
 
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 var extractExtends = require('./css-extract-extends');
@@ -692,7 +745,7 @@ function without(obj, unwanted) {
   }, {});
 }
 
-},{"./build-exports":12,"./composition":13,"./css-extract-extends":15,"./css-key":16,"./extract-exports":17,"./scopeify":23}],15:[function(require,module,exports){
+},{"./build-exports":14,"./composition":15,"./css-extract-extends":17,"./css-key":18,"./extract-exports":19,"./scopeify":25}],17:[function(require,module,exports){
 'use strict';
 
 var makeComposition = require('./composition').makeComposition;
@@ -745,7 +798,7 @@ function getClassName(str) {
   return trimmed[0] === '.' ? trimmed.substr(1) : trimmed;
 }
 
-},{"./composition":13}],16:[function(require,module,exports){
+},{"./composition":15}],18:[function(require,module,exports){
 'use strict';
 
 /**
@@ -755,7 +808,7 @@ function getClassName(str) {
 
 module.exports = ' css ';
 
-},{}],17:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 var regex = require('./regex');
@@ -782,7 +835,7 @@ function getExport(css, regex) {
   return prop;
 }
 
-},{"./regex":20}],18:[function(require,module,exports){
+},{"./regex":22}],20:[function(require,module,exports){
 'use strict';
 
 var cssKey = require('./css-key');
@@ -791,7 +844,7 @@ module.exports = function getCss(csjs) {
   return csjs[cssKey];
 };
 
-},{"./css-key":16}],19:[function(require,module,exports){
+},{"./css-key":18}],21:[function(require,module,exports){
 'use strict';
 
 /**
@@ -809,7 +862,7 @@ module.exports = function hashStr(str) {
   return hash >>> 0;
 };
 
-},{}],20:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 var findClasses = /(\.)(?!\d)([^\s\.,{\[>+~#:)]*)(?![^{]*})/.source;
@@ -825,7 +878,7 @@ module.exports = {
   ignoreComments: ignoreComments,
 };
 
-},{}],21:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 var ignoreComments = require('./regex').ignoreComments;
 
 module.exports = replaceAnimations;
@@ -856,7 +909,7 @@ function replaceAnimations(result) {
   return result;
 }
 
-},{"./regex":20}],22:[function(require,module,exports){
+},{"./regex":22}],24:[function(require,module,exports){
 'use strict';
 
 var encode = require('./base62-encode');
@@ -870,7 +923,7 @@ module.exports = function fileScoper(fileSrc) {
   }
 };
 
-},{"./base62-encode":11,"./hash-string":19}],23:[function(require,module,exports){
+},{"./base62-encode":13,"./hash-string":21}],25:[function(require,module,exports){
 'use strict';
 
 var fileScoper = require('./scoped-name');
@@ -911,7 +964,7 @@ function scopify(css, ignores) {
   return replaceAnimations(result);
 }
 
-},{"./regex":20,"./replace-animations":21,"./scoped-name":22}],24:[function(require,module,exports){
+},{"./regex":22,"./replace-animations":23,"./scoped-name":24}],26:[function(require,module,exports){
 (function (global){
 var topLevel = typeof global !== 'undefined' ? global :
     typeof window !== 'undefined' ? window : {}
@@ -932,7 +985,7 @@ if (typeof document !== 'undefined') {
 module.exports = doccy;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"min-document":35}],25:[function(require,module,exports){
+},{"min-document":6}],27:[function(require,module,exports){
 (function (global){
 var win;
 
@@ -949,7 +1002,7 @@ if (typeof window !== "undefined") {
 module.exports = win;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],26:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 module.exports = attributeToProperty
 
 var transform = {
@@ -970,7 +1023,7 @@ function attributeToProperty (h) {
   }
 }
 
-},{}],27:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 var attrToProp = require('hyperscript-attribute-to-property')
 
 var VAR = 0, TEXT = 1, OPEN = 2, CLOSE = 3, ATTR = 4
@@ -1267,7 +1320,7 @@ var closeRE = RegExp('^(' + [
 ].join('|') + ')(?:[\.#][a-zA-Z0-9\u007F-\uFFFF_:-]+)*$')
 function selfClosing (tag) { return closeRE.test(tag) }
 
-},{"hyperscript-attribute-to-property":26}],28:[function(require,module,exports){
+},{"hyperscript-attribute-to-property":28}],30:[function(require,module,exports){
 var inserted = {};
 
 module.exports = function (css, options) {
@@ -1291,7 +1344,7 @@ module.exports = function (css, options) {
     }
 };
 
-},{}],29:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 (function (global){
 /**
  * marked - a markdown parser
@@ -2683,7 +2736,7 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
 })(this || (typeof window !== 'undefined' ? window : global));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],30:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 assert.notEqual = notEqual
 assert.notOk = notOk
 assert.equal = equal
@@ -2707,7 +2760,7 @@ function assert (t, m) {
   if (!t) throw new Error(m || 'AssertionError')
 }
 
-},{}],31:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 /* global MutationObserver */
 var document = require('global/document')
 var window = require('global/window')
@@ -2811,7 +2864,7 @@ function eachMutation (nodes, fn) {
   }
 }
 
-},{"assert":30,"global/document":24,"global/window":25}],32:[function(require,module,exports){
+},{"assert":32,"global/document":26,"global/window":27}],34:[function(require,module,exports){
 var colors = {
 //    white: "#ffffff", // borders, font on input background
 /**/    themeColor1: "#ff0000", //background white
@@ -2872,7 +2925,7 @@ module.exports = {
   welcome_text_color: '#43409a',
 }
 
-},{}],33:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 const csjs = require('csjs-inject')
 const bel = require('bel') // @TODO: replace with `elb`
 const belmark = require('belmark') // @TODO: replace with `elbmark`
@@ -3444,60 +3497,7 @@ function styles (font_url, theme) {
   return css
 }
 
-},{"./defaulttheme.js":32,"bel":2,"belmark":4,"csjs-inject":7}],34:[function(require,module,exports){
-// USAGE
-const workshop = require('../') // no default theme initialised
-
-// var workshop1 = workshop.customize(workshop.defaults) // default theme initialised
-// console.log(workshop === workshop1) // true
-// /* or */ var workshop2 = workshop.customize({})
-// console.log(workshop1 === workshop2) // false
-// var el = workshop({}) // inits and uses default theme
-
-setTimeout(async () => {
-  // @TODO: every FIELD can be either an OBJECT or URL to a JSON
-  //        and it has DEFAULTS
-  const data = '/demo/workshop.json'
-  const opts = {
-    config: {
-      home_link: 'http://github.com/ethereum/play',
-      home_text: 'decentralized e-learning made by play.ethereum.org',
-      intro_prefix_text: 'Learn with Play',
-    },
-    theme: {
-      menu_backgroundColor: 'yellow',
-    },
-    css: { },
-  }
-  var app
-  app = await workshop(data, opts)
-
-  const el = await app.render()
-  document.body.appendChild(el)
-}, 0)
-
-var height = '100vh'
-// var height = 'auto'
-var st = document.createElement('style')
-st.innerHTML = `
-  html {
-    box-sizing: border-box;
-    display: table;
-    min-width: 100%;
-    margin: 0;
-  }
-  body {
-    box-sizing: border-box;
-    margin: 0;
-    display: flex;
-    flex-flow: column;
-    height: ${height};
-  }`
-document.head.appendChild(st)
-
-},{"../":37}],35:[function(require,module,exports){
-
-},{}],36:[function(require,module,exports){
+},{"./defaulttheme.js":34,"bel":3,"belmark":5,"csjs-inject":9}],36:[function(require,module,exports){
 var colors = {
   // white: "#ffffff", // borders, font on input background
   themeColor1: "#2c323c", //background themeColor1
@@ -3566,4 +3566,4 @@ module.exports = workshopping.customize({
   theme: require('./theme.js')
 })
 
-},{"./theme.js":36,"workshopping":33}]},{},[34]);
+},{"./theme.js":36,"workshopping":35}]},{},[1]);
