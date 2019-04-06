@@ -11,7 +11,7 @@ module.exports = workshopping.customize({
     menu_minHeight: '0px',
     menu_height: 'auto',
     menu_border: '0',
-    menu_padding: '15px 0px',
+    menu_padding: '25px 0px',
     menu_and_minimap_and_wide_backgroundColor: colors.themeColor1,
     container_backgroundColor: colors.themeColor1,
     container_border: '0',

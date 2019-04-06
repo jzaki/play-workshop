@@ -1,6 +1,6 @@
 {
   "name": "play-workshop",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "module for making play themed workshop apps",
   "main": "src/workshop.js",
   "scripts": {
@@ -24,9 +24,10 @@
   },
   "homepage": "https://github.com/ethereum-play/play-workshop#readme",
   "devDependencies": {
+    "belmark": "^2.0.3",
     "budo": "^11.6.0"
   },
   "dependencies": {
-    "workshopping": "^0.2.0"
+    "workshopping": "^0.2.1"
   }
 }
