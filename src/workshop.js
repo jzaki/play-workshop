@@ -5,6 +5,7 @@ var colors = {
   lavenderGrey: "#e3e8ee",
   androidGreen: "#9BC53D"
 }
+
 var font_url = (location.origin.includes('//localhost')
   || location.origin.includes('//127.0.0.1')
   || location.origin.includes('//0.0.0.0')
@@ -13,7 +14,6 @@ var font_url = (location.origin.includes('//localhost')
     '../src/OverpassMono-Regular.ttf'
     : 'https://github.com/ethereum-play/play-workshop/blob/master/src/OverpassMono-Regular.ttf?raw=true'
 
-console.log(font_url)
 module.exports = workshopping.customize({
   theme: {
     '--font': font_url,

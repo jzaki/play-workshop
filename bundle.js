@@ -56,7 +56,7 @@ const workshop = require('../')
 // use: `document.body.appendChild(await workshop())`
 module.exports = async () => await workshop()
 
-},{"../":1123}],3:[function(require,module,exports){
+},{"../":1124}],3:[function(require,module,exports){
 const workshop = require('../')
 
 // use: `document.body.appendChild(await demo())`
@@ -73,7 +73,7 @@ module.exports = async function demo () {
   return await workshop({ config, theme, css })
 }
 
-},{"../":1123}],4:[function(require,module,exports){
+},{"../":1124}],4:[function(require,module,exports){
 var document = require('global/document')
 var hyperx = require('hyperx')
 var onload = require('on-load')
@@ -115486,6 +115486,25 @@ module.exports.default = module.exports
 module.exports.createElement = belCreateElement
 
 },{"./appendChild":1117,"hyperx":1110}],1119:[function(require,module,exports){
+const cors = 'https://cors-anywhere.herokuapp.com/'
+const absoluteURLregex = /(?:^[a-z][a-z0-9+.-]*:|\/\/)/
+
+module.exports = getURL
+
+function getURL (url) {
+  const isAbsoluteURL = absoluteURLregex.test(url)
+  if (isAbsoluteURL) {
+    const islocalhost = (url.includes('//localhost')
+    || url.includes('//127.0.0.1') || url.includes('//0.0.0.0')
+    || url.includes('//10.0.0') || url.includes('//192.168'))
+    const sameorigin = new URL(url).origin === location.origin
+    return (islocalhost || sameorigin) ? url : cors + url
+  }
+  return url  
+}
+
+},{}],1120:[function(require,module,exports){
+const getURL = require('_get-url')
 /******************************************************************************
   INTERFACE
 ******************************************************************************/
@@ -115510,11 +115529,9 @@ function makeSVGicon (svgURL, callback) {
     const faviconURL = canvas.toDataURL()
     callback(null, faviconURL)
   }
-  var cors = 'https://cors-anywhere.herokuapp.com/'
-  var isAbsoluteURL = /(?:^[a-z][a-z0-9+.-]*:|\/\/)/.test(svgURL)
   img.onerror = event => callback(event)
   img.setAttribute('crossOrigin', 'anonymous')
-  img.setAttribute('src', isAbsoluteURL ? cors + svgURL : svgURL)
+  img.setAttribute('src', getURL(svgURL))
 }
 function setFavicon (faviconURL) {
   const favicon =  (favicon => {
@@ -115560,7 +115577,7 @@ const drawTriangles = (ctx, dim) => {
   }
 }
 
-},{}],1120:[function(require,module,exports){
+},{"_get-url":1119}],1121:[function(require,module,exports){
 
 module.exports = crawlworkshop
 
@@ -115599,7 +115616,7 @@ async function crawlworkshop (data, href) {
   }
 }
 
-},{}],1121:[function(require,module,exports){
+},{}],1122:[function(require,module,exports){
 const skilltree = require('skilltree.js')
 const crawl = require('crawl-workshop')
 const bel = require('bel')
@@ -115621,12 +115638,13 @@ const css = csjs`
   width: 100%;
 }`
 
-},{"bel":1118,"crawl-workshop":1120,"csjs-inject":9,"skilltree.js":1116}],1122:[function(require,module,exports){
+},{"bel":1118,"crawl-workshop":1121,"csjs-inject":9,"skilltree.js":1116}],1123:[function(require,module,exports){
 const csjs = require('csjs-inject')
 const bel = require('bel') // @TODO: replace with `elb`
 const belmark = require('belmark') // @TODO: replace with `elbmark`
 const skilltree = require('skilltrees')
 
+const getURL = require('_get-url')
 const svg2favicon = require('_svg2favicon')
 
 const CONFIG = default_config()
@@ -115910,12 +115928,12 @@ async function _workshopping ({ config, theme, css }) {
 }
 
 function styles (font_url, theme) {
-  var FONT = font_url.split('/').join('-').split('.').join('_')
+  var FONT = font_url.split('/').join('-').split('.').join('-').split(':').join('-').split('?').join('-').split('=').join('-')
   var font = bel`
     <style>
     @font-face {
       font-family: ${FONT};
-      ${FONT !== font_url ? `src: url('${font_url}');` : ''}
+      ${FONT !== font_url ? `src: url('${getURL(font_url)}');` : ''}
     }
     </style>`
   document.head.appendChild(font)
@@ -116272,7 +116290,7 @@ function default_css () {
   return Object.freeze({ css: '@TODO: make available' })
 }
 
-},{"_svg2favicon":1119,"bel":1118,"belmark":5,"csjs-inject":9,"skilltrees":1121}],1123:[function(require,module,exports){
+},{"_get-url":1119,"_svg2favicon":1120,"bel":1118,"belmark":5,"csjs-inject":9,"skilltrees":1122}],1124:[function(require,module,exports){
 const workshopping = require('workshopping')
 
 var colors = {
@@ -116280,6 +116298,7 @@ var colors = {
   lavenderGrey: "#e3e8ee",
   androidGreen: "#9BC53D"
 }
+
 var font_url = (location.origin.includes('//localhost')
   || location.origin.includes('//127.0.0.1')
   || location.origin.includes('//0.0.0.0')
@@ -116288,7 +116307,6 @@ var font_url = (location.origin.includes('//localhost')
     '../src/OverpassMono-Regular.ttf'
     : 'https://github.com/ethereum-play/play-workshop/blob/master/src/OverpassMono-Regular.ttf?raw=true'
 
-console.log(font_url)
 module.exports = workshopping.customize({
   theme: {
     '--font': font_url,
@@ -116340,4 +116358,4 @@ module.exports = workshopping.customize({
   }
 })
 
-},{"workshopping":1122}]},{},[1]);
+},{"workshopping":1123}]},{},[1]);
