@@ -1,6 +1,6 @@
 {
   "name": "play-workshop",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "module for making play themed workshop apps",
   "main": "src/workshop.js",
   "scripts": {
@@ -28,6 +28,6 @@
     "budo": "^11.6.0"
   },
   "dependencies": {
-    "workshopping": "^0.2.2"
+    "workshopping": "^0.2.3"
   }
 }

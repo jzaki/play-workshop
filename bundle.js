@@ -115511,9 +115511,10 @@ function makeSVGicon (svgURL, callback) {
     callback(null, faviconURL)
   }
   var cors = 'https://cors-anywhere.herokuapp.com/'
+  var isAbsoluteURL = /(?:^[a-z][a-z0-9+.-]*:|\/\/)/.test(svgURL)
   img.onerror = event => callback(event)
   img.setAttribute('crossOrigin', 'anonymous')
-  img.setAttribute('src', cors + svgURL)
+  img.setAttribute('src', isAbsoluteURL ? cors + svgURL : svgURL)
 }
 function setFavicon (faviconURL) {
   const favicon =  (favicon => {
@@ -116279,9 +116280,18 @@ var colors = {
   lavenderGrey: "#e3e8ee",
   androidGreen: "#9BC53D"
 }
+var font_url = (location.origin.includes('//localhost')
+  || location.origin.includes('//127.0.0.1')
+  || location.origin.includes('//0.0.0.0')
+  || location.origin.includes('//10.0.0')
+  || location.origin.includes('//192.168')) ?
+    '../src/OverpassMono-Regular.ttf'
+    : 'https://github.com/ethereum-play/play-workshop/blob/master/src/OverpassMono-Regular.ttf?raw=true'
+
+console.log(font_url)
 module.exports = workshopping.customize({
   theme: {
-    '--font': '../src/OverpassMono-Regular.ttf',
+    '--font': font_url,
     menu_minHeight: '0px',
     menu_height: 'auto',
     menu_border: '0',
