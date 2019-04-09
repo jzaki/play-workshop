@@ -1,6 +1,6 @@
 {
   "name": "play-workshop",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "module for making play themed workshop apps",
   "main": "src/workshop.js",
   "scripts": {

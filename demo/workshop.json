@@ -33,12 +33,10 @@
     "info": "./docs/recover-electrum-wallet-from-a-seed.md"
   }],
   "needs": [
-    "chriseth.com/learnRemix/workshop-remix?share=17%",
-    "https://ninabreznik.com/learnRemix/workshop-remix?share=17%",
-    "https://vitalik.com/ethereum/workshop-ethereum.html?share=9%",
-    "https://vlad.com/ethereum/workshop-ethereum/?share=2%"
+    "https://ninabreznik.github.io/play-workshop-chainsafe-blockchainbootcamp-introduction-to-solidity/",
+    "https://ninabreznik.github.io/play-workshop-chainsafe-blockchainbootcamp-introduction/"
   ],
   "unlocks": [
-    "https://karl.com/run-bitcoin-business/workshop-crypto-economics?request=1%"
+    "https://ninabreznik.github.io/play-workshop-remix/"
   ]
 }
