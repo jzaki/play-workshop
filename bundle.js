@@ -115323,7 +115323,7 @@ const _ajax_cache_get = async (url, transform, ttl, registry_url, cache) => {
   localStorage[url] = JSON.stringify({ data, timestamp })
   return data
 }
-const _isURL = url => {
+const _isURL = (url = '') => {
   const href = url.split('#')[0].split('?')[0]
   check.value = href
   if (check.validity.valid) {
@@ -115466,7 +115466,7 @@ async function registry (name, validate, ttl = default_ttl) {
         } catch (e) {
           json = {}
         }
-        const isPublicURL = _isURL(meta.url)
+        const isPublicURL = _isURL((meta || {}).url)
         const isvalid = isPublicURL && validate(json, meta)
         if (isvalid) valid.push({ data: json, meta })
         else invalid.push({ data: json, meta })
